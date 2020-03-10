@@ -1,49 +1,49 @@
 package net.obviam.droids.controller;
 
-import net.obviam.droids.model.Arena;
-import net.obviam.droids.model.Droid;
+import net.obviam.droids.model.BattleField;
+import net.obviam.droids.model.Hero;
 
 public class ArenaController {
 
 	private static final int unit = 32;
-	private Arena arena;
+	private BattleField battleField;
 	
 	/** the target cell **/
 	private float targetX, targetY;
 	/** true if the droid moves **/
 	private boolean moving = false;
 	
-	public ArenaController(Arena arena) {
-		this.arena = arena;
+	public ArenaController(BattleField battleField) {
+		this.battleField = battleField;
 	}
 	
 	public void update(float delta) {
-		Droid droid = arena.getDroid();
+		Hero hero = battleField.getHero();
 		if (moving) {
 			// move on X
 			int bearing = 1;
-			if (droid.getX() > targetX) {
+			if (hero.getX() > targetX) {
 				bearing = -1;
 			} 
-			if (droid.getX() != targetX) {
-				droid.setX(droid.getX() + bearing * droid.getSpeed() * delta);
+			if (hero.getX() != targetX) {
+				hero.setX(hero.getX() + bearing * hero.getSpeed() * delta);
 				// check if arrived
-				if ((droid.getX() < targetX && bearing == -1)
-						|| (droid.getX() > targetX && bearing == 1)) droid.setX(targetX);
+				if ((hero.getX() < targetX && bearing == -1)
+						|| (hero.getX() > targetX && bearing == 1)) hero.setX(targetX);
 			}
 			// move on Y
 			bearing = 1;
-			if (droid.getY() > targetY) {
+			if (hero.getY() > targetY) {
 				bearing = -1;
 			} 
-			if (droid.getY() != targetY) {
-				droid.setY(droid.getY() + bearing * droid.getSpeed() * delta);
+			if (hero.getY() != targetY) {
+				hero.setY(hero.getY() + bearing * hero.getSpeed() * delta);
 				// check if arrived
-				if ((droid.getY() < targetY && bearing == -1)
-						|| (droid.getY() > targetY && bearing == 1)) droid.setY(targetY);
+				if ((hero.getY() < targetY && bearing == -1)
+						|| (hero.getY() > targetY && bearing == 1)) hero.setY(targetY);
 			}
 			// check if arrived
-			if (droid.getX() == targetX && droid.getY() == targetY) 
+			if (hero.getX() == targetX && hero.getY() == targetY)
 				moving = false;
 		}
 	}
@@ -54,7 +54,7 @@ public class ArenaController {
 	public boolean onClick(int x, int y) {
 		targetX = x / unit;
 		targetY = y / unit;
-		if (arena.getGrid()[(int) targetY][(int) targetX] == null) {
+		if (battleField.getGrid()[(int) targetY][(int) targetX] == null) {
 			// start moving the droid towards the target
 			moving = true;
 			return true;

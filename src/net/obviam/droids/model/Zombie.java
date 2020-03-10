@@ -1,12 +1,12 @@
 package net.obviam.droids.model;
 
-public class Enemy {
+public class Zombie {
 
 	private float x;
 	private float y;
 	private int hitpoints = 10;
 	
-	public Enemy(float x, float y) {
+	public Zombie(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}

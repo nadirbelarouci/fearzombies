@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Arena {
+public class BattleField {
 	
 	public static final int WIDTH = 480 / 32;
 	public static final int HEIGHT = 320 / 32;
@@ -13,11 +13,11 @@ public class Arena {
 
 	private Object[][] grid;
 	private List<Obstacle>	obstacles = new ArrayList<Obstacle>();
-	private List<Enemy>		enemies = new ArrayList<Enemy>();
-	private Droid droid;
+	private List<Zombie>		enemies = new ArrayList<Zombie>();
+	private Hero hero;
 	
-	public Arena(Droid droid) {
-		this.droid = droid;
+	public BattleField(Hero hero) {
+		this.hero = hero;
 
 		grid = new Object[HEIGHT][WIDTH];
 		for (int i = 0; i < WIDTH; i++) {
@@ -26,7 +26,7 @@ public class Arena {
 			}
 		}
 		// add the droid
-		grid[(int)droid.getY()][(int) droid.getX()] = droid;
+		grid[(int) hero.getY()][(int) hero.getX()] = hero;
 		
 		// add 5 obstacles and 5 enemies at random positions
 		for (int i = 0; i < 5; i++) {
@@ -42,19 +42,19 @@ public class Arena {
 				x = random.nextInt(WIDTH);
 				y = random.nextInt(HEIGHT);
 			}
-			grid[y][x] = new Enemy(x, y);
-			enemies.add((Enemy) grid[y][x]);
+			grid[y][x] = new Zombie(x, y);
+			enemies.add((Zombie) grid[y][x]);
 		}
 	}
 	
 	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
-	public List<Enemy> getEnemies() {
+	public List<Zombie> getEnemies() {
 		return enemies;
 	}
-	public Droid getDroid() {
-		return droid;
+	public Hero getHero() {
+		return hero;
 	}
 
 	public Object[][] getGrid() {

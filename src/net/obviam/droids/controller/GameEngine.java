@@ -3,29 +3,29 @@ package net.obviam.droids.controller;
 import java.awt.Event;
 import java.awt.Graphics;
 
-import net.obviam.droids.model.Arena;
-import net.obviam.droids.model.Droid;
+import net.obviam.droids.model.BattleField;
+import net.obviam.droids.model.Hero;
 import net.obviam.droids.view.Renderer;
-import net.obviam.droids.view.SimpleArenaRenderer;
+import net.obviam.droids.view.BattleFieldRenderer;
 
 public class GameEngine {
 
-	private Arena arena;
-	private Droid droid;
+	private BattleField battleField;
+	private Hero hero;
 	private Renderer renderer;
 	private ArenaController controller;
 	
 	public GameEngine() {
-		droid = new Droid();
+		hero = new Hero();
 		// position droid in the middle
-		droid.setX(Arena.WIDTH / 2);
-		droid.setY(Arena.HEIGHT / 2);
-		arena = new Arena(droid);
+		hero.setX(BattleField.WIDTH / 2);
+		hero.setY(BattleField.HEIGHT / 2);
+		battleField = new BattleField(hero);
 		
 		// setup renderer (view)
-		renderer = new SimpleArenaRenderer(arena);
+		renderer = new BattleFieldRenderer(battleField);
 		// setup controller
-		controller = new ArenaController(arena);
+		controller = new ArenaController(battleField);
 	}
 	
 	/** handle the Event passed from the main applet **/

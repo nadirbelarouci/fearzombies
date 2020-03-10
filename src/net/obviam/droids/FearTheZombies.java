@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 import net.obviam.droids.controller.GameEngine;
 
-public class Droids extends Applet implements Runnable {
+public class FearTheZombies extends Applet implements Runnable {
 
 	private static final long serialVersionUID = -2472397668493332423L;
 	

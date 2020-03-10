@@ -1,6 +1,6 @@
 package net.obviam.droids.model;
 
-public class Droid {
+public class Hero {
 
 	private float x;
 	private float y;
